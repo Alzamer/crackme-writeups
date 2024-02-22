@@ -19,3 +19,15 @@ This is probably just a fragment of some function (we get it's local variables f
 
 I think this function, from lines 01 to 07, determines the length of the string passed as an argument - I've tried this interesting formula from lines 05 to 07 on some sample strings, and it gives the correct string length every time - I didn't know that before.
 OK, so our string length is stored in ecx, and in lines 08 to 10 we're simply overwriting the string [ebp+8] with a value stored in [ebp+0Ch].
+
+### Exercise 1, page 36
+`call` pushes the next instruction to the stack, and jumps to specified address
+`ret` pops the return address from the stack and jumps there
+
+Unfortunately, eip is a special register, and we can't get access to it's value using conventional methods (ie. `mov eax, eip`). However, there is a trick to get its value 
+
+**01:** `get: mov eax, [esp]`
+**02:** `ret`
+**03:** `call get`
+
+When we're calling get at line 03, we are pushing the address of the next instruction, and then we're jumping to get label - then we're dereferencing esp, which points at the top of the stack. So far, our stack contains only the value of the return code, which is equal to the eip value we had when the program was at 03 line.
