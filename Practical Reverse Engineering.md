@@ -31,3 +31,17 @@ Unfortunately, eip is a special register, and we can't get access to it's value 
 **03:** `call get`
 
 When we're calling get at line 03, we are pushing the address of the next instruction, and then we're jumping to get label - then we're dereferencing esp, which points at the top of the stack. So far, our stack contains only the value of the return code, which is equal to the eip value we had when the program was at 03 line.
+
+### Exercise 2, page 36
+eip is a register, which contains address of the next instruction to be executed. Of course `mov eax, eip` won't work, so we can use:
+
+    jmp 0xAABBCCDD
+we can also do
+	  
+
+    call 0xAABBCCDD
+
+because call is a jump, which pushes the return address before jumping. Another way to do this
+
+    push 0xAABBCCDD
+    ret
