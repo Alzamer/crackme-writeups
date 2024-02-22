@@ -45,3 +45,19 @@ because call is a jump, which pushes the return address before jumping. Another 
 
     push 0xAABBCCDD
     ret
+
+### Exercise 3, page 36
+Disassembled addme function:
+
+**01:** `push ebp`
+**02:** `mov ebp, esp`
+**03:** `...`
+**04:** `movsx eax, word ptr [ebp+8]`
+**05:** `movsx ecx, word ptr [ebp+0Ch]`
+**06:** `add eax, ecx`
+**07:** `...`
+**08:** `mov esp, ebp`
+**09:** `pop ebp`
+**10:** `retn`
+
+esp is restored just before returning from the function, at line 08 - and we're saving the initial esp value at line 02. What would happen, if we the esp initial value wasn't restored? We aren't doing anything with the esp register, so I guess everything would be all right. But if it turns out in lines 03 and 07 we are doing something with esp register, we must restore its value - retn uses esp to determine return address.
