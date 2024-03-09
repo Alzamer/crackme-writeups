@@ -61,3 +61,6 @@ Disassembled addme function:
 **10:** `retn`
 
 esp is restored just before returning from the function, at line 08 - and we're saving the initial esp value at line 02. What would happen, if we the esp initial value wasn't restored? We aren't doing anything with the esp register, so I guess everything would be all right. But if it turns out in lines 03 and 07 we are doing something with esp register, we must restore its value - retn uses esp to determine return address.
+
+### Exercise 3, page 54
+I believe there's a typo in the book, because some functions have @ suffix, not prefix - function preceded by @n where n is a number (eg. `_DllMain@12`) means that the function should be called in stdcall convention and the size of the arguments in our case is 12 bytes.
